@@ -23,12 +23,12 @@ con.close()
 
 win=Tk()
 win.state("zoomed")
-win.configure(bg="powder blue")
+win.configure(bg="steel blue")
 
-lbl_title=Label(win,text="Banking Automation",bg="powder blue",font=('Arial',55,'bold','underline'))
-lbl_title.place(relx=.25,rely=.02)
+lbl_title=Label(win,text="Banking Automation",bg="steel blue",font=('Arial',55,'bold','underline'))
+lbl_title.place(relx=0.5, rely=0, anchor='n')
 
-img=Image.open("logo.png").resize((220,140))
+img=Image.open("logo.png").resize((220,155))
 imgtk=ImageTk.PhotoImage(img,master=win)
 
 lbl_logo=Label(win,image=imgtk)
@@ -38,7 +38,7 @@ lbl_logo.place(x=0,y=0)
 
 def login_screen():
     frm=Frame(win)
-    frm.configure(bg="pink")
+    frm.configure(bg="light blue")
     frm.place(relx=0,rely=.2,relwidth=1,relheight=.8)
 
     def newuser():
@@ -66,39 +66,46 @@ def login_screen():
             global tup
             tup=cur.fetchone()
             if(tup==None):
-                messagebox.showerror("login","Invalid ACN or Pass")
+                messagebox.showerror("login","Invalid Account no. or Password")
             else:
                 frm.destroy()
                 welcome_screen()
-    lbl_acn=Label(frm,text="Account No",bg='pink',font=('Arial',20,'bold'))
+    lbl_acn=Label(frm,text="Account No.  :",bg='light blue',font=('Arial',20,'bold'))
     lbl_acn.place(relx=.3,rely=.1)
     
     e_acn=Entry(frm,font=('Arial',20,'bold'),bd=5)
     e_acn.place(relx=.45,rely=.1)
     e_acn.focus()
     
-    lbl_pass=Label(frm,text="Password",bg='pink',font=('Arial',20,'bold'))
+    lbl_pass=Label(frm,text="Password      :",bg='light blue',font=('Arial',20,'bold'))
     lbl_pass.place(relx=.3,rely=.25)
     
     e_pass=Entry(frm,font=('Arial',20,'bold'),bd=5,show="*")
     e_pass.place(relx=.45,rely=.25)
     
-    btn_login=Button(frm,text="login",command=login_db,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_login.place(relx=.45,rely=.4)
+     # Bind Enter key on Account field to move to Password field
+    e_acn.bind("<Return>", lambda event: e_pass.focus_set())
     
-    btn_reset=Button(frm,text="reset",command=reset,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_reset.place(relx=.55,rely=.4)
+    btn_login=Button(frm,text="login",command=login_db,width=6,font=('Arial',15,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_login.place(relx=.495,rely=.35)
     
-    btn_fp=Button(frm,text="forgot password",command=forgot,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_fp.place(relx=.435,rely=.55)
+     # Bind Enter key on Password field to move to Login field
+    e_pass.bind("<Return>", lambda event: btn_login.invoke())
+
     
-    btn_new=Button(frm,text="open new account",command=newuser,width=18,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_new.place(relx=.4,rely=.7)
+    btn_reset=Button(frm,text="reset",command=reset,width=6,font=('Arial',15,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_reset.place(relx=.555,rely=.35)
+    
+    btn_fp=Button(frm,text="forgot password",command=forgot,width=16,font=('Arial',15,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_fp.place(relx=.485,rely=.435)
+    
+    btn_new=Button(frm,text="open new account",command=newuser,width=18,font=('Arial',15,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_new.place(relx=.477,rely=.525)
     
 
 def newuser_screen():
     frm=Frame(win)
-    frm.configure(bg="pink")
+    frm.configure(bg="sky blue")
     frm.place(relx=0,rely=.2,relwidth=1,relheight=.8)
 
     def back():
@@ -133,53 +140,53 @@ def newuser_screen():
         frm.destroy()
         login_screen()
         
-    btn_back=Button(frm,text="back",command=back,font=('Arial',20,'bold'),bd=5,bg="powder blue")
+    btn_back=Button(frm,text="back",command=back,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
     btn_back.place(relx=0,rely=0)
     
-    lbl_name=Label(frm,text="Name",bg='pink',font=('Arial',20,'bold'))
+    lbl_name=Label(frm,text="Full Name :",bg='sky blue',font=('Arial',20,'bold'))
     lbl_name.place(relx=.3,rely=.05)
     
     e_name=Entry(frm,font=('Arial',20,'bold'),bd=5)
     e_name.place(relx=.45,rely=.05)
     e_name.focus()
     
-    lbl_pass=Label(frm,text="Password",bg='pink',font=('Arial',20,'bold'))
+    lbl_pass=Label(frm,text="Password :",bg='sky blue',font=('Arial',20,'bold'))
     lbl_pass.place(relx=.3,rely=.2)
     
     e_pass=Entry(frm,font=('Arial',20,'bold'),bd=5)
     e_pass.place(relx=.45,rely=.2)
 
     
-    lbl_email=Label(frm,text="Email",bg='pink',font=('Arial',20,'bold'))
+    lbl_email=Label(frm,text="Email Id :",bg='sky blue',font=('Arial',20,'bold'))
     lbl_email.place(relx=.3,rely=.35)
     
     e_email=Entry(frm,font=('Arial',20,'bold'),bd=5)
     e_email.place(relx=.45,rely=.35)
     
     
-    lbl_mob=Label(frm,text="Mob",bg='pink',font=('Arial',20,'bold'))
+    lbl_mob=Label(frm,text="Mobile No.:",bg='sky blue',font=('Arial',20,'bold'))
     lbl_mob.place(relx=.3,rely=.5)
     
     e_mob=Entry(frm,font=('Arial',20,'bold'),bd=5)
     e_mob.place(relx=.45,rely=.5)
     
-    lbl_type=Label(frm,text="ACN Type",bg='pink',font=('Arial',20,'bold'))
+    lbl_type=Label(frm,text="Account Type :",bg='sky blue',font=('Arial',20,'bold'))
     lbl_type.place(relx=.3,rely=.65)
     
     cb_type=Combobox(frm,values=['Saving','Current'],font=('Arial',20,'bold'))
     cb_type.current(0)
     cb_type.place(relx=.45,rely=.65)
     
-    btn_open=Button(frm,text="open",command=openacn_db,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_open.place(relx=.45,rely=.8)
+    btn_open=Button(frm,text="open",command=openacn_db,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_open.place(relx=.48,rely=.8)
     
-    btn_reset=Button(frm,text="reset",font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_reset.place(relx=.55,rely=.8)
+    btn_reset=Button(frm,text="reset",font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_reset.place(relx=.57,rely=.8)
     
     
 def forgotpass_screen():
     frm=Frame(win)
-    frm.configure(bg="pink")
+    frm.configure(bg="deep sky blue")
     frm.place(relx=0,rely=.2,relwidth=1,relheight=.8)
 
     def back():
@@ -204,40 +211,40 @@ def forgotpass_screen():
             else:
                 messagebox.showinfo("Forgot",f"Your Password is:{tup[0]}")
             
-    btn_back=Button(frm,text="back",command=back,font=('Arial',20,'bold'),bd=5,bg="powder blue")
+    btn_back=Button(frm,text="back",command=back,font=('Arial',20,'bold'),bd=5,bg="deepskyblue3",cursor="hand2")
     btn_back.place(relx=0,rely=0)
     
-    lbl_acn=Label(frm,text="ACN",bg='pink',font=('Arial',20,'bold'))
+    lbl_acn=Label(frm,text="Account No.:",bg='deep sky blue',font=('Arial',20,'bold'))
     lbl_acn.place(relx=.3,rely=.2)
     
     e_acn=Entry(frm,font=('Arial',20,'bold'),bd=5)
     e_acn.place(relx=.45,rely=.2)
     e_acn.focus()
     
-    lbl_email=Label(frm,text="Email",bg='pink',font=('Arial',20,'bold'))
+    lbl_email=Label(frm,text="Email Id :",bg='deep sky blue',font=('Arial',20,'bold'))
     lbl_email.place(relx=.3,rely=.35)
     
     e_email=Entry(frm,font=('Arial',20,'bold'),bd=5)
     e_email.place(relx=.45,rely=.35)
     
     
-    lbl_mob=Label(frm,text="Mob",bg='pink',font=('Arial',20,'bold'))
+    lbl_mob=Label(frm,text="Mobile No.:",bg='deep sky blue',font=('Arial',20,'bold'))
     lbl_mob.place(relx=.3,rely=.5)
     
     e_mob=Entry(frm,font=('Arial',20,'bold'),bd=5)
     e_mob.place(relx=.45,rely=.5)
     
     
-    btn_get=Button(frm,text="get",command=get_db,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_get.place(relx=.45,rely=.65)
+    btn_get=Button(frm,text="get",command=get_db,font=('Arial',20,'bold'),bd=5,bg="deepskyblue3",cursor="hand2")
+    btn_get.place(relx=.48,rely=.65)
     
-    btn_reset=Button(frm,text="reset",font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_reset.place(relx=.55,rely=.65)
+    btn_reset=Button(frm,text="reset",font=('Arial',20,'bold'),bd=5,bg="deepskyblue3",cursor="hand2")
+    btn_reset.place(relx=.56,rely=.65)
     
     
 def welcome_screen():
     frm=Frame(win)
-    frm.configure(bg="pink")
+    frm.configure(bg="cyan2")
     frm.place(relx=0,rely=.2,relwidth=1,relheight=.8)
     
     def logout():
@@ -245,32 +252,32 @@ def welcome_screen():
         login_screen()
        
     def checkbal():
-        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=3,highlightcolor='brown')
-        ifrm.configure(bg='white')
+        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=10,highlightcolor='brown')
+        ifrm.configure(bg='cadetblue1')
         ifrm.place(relx=.25,rely=.2,relwidth=.6,relheight=.6)
         
-        lbl_page.configure(text="This is Check bal page")
+        lbl_page.configure(text="This is Check balance page")
         
         con=sqlite3.connect(database="bank.sqlite")
         cur=con.cursor()
         cur.execute("select account_name,account_bal,account_opendate from accounts where account_no=?",(tup[0],))
         row=cur.fetchone()
         
-        lbl_acn=Label(ifrm,text=f"Account Number\t{tup[0]}",bg='white',font=('Arial',15,'bold'),fg='red')
+        lbl_acn=Label(ifrm,text=f"Account Number:\t\t{tup[0]}",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
         lbl_acn.place(relx=.3,rely=.1)
     
-        lbl_name=Label(ifrm,text=f"Holder Name\t{row[0]}",bg='white',font=('Arial',15,'bold'),fg='red')
+        lbl_name=Label(ifrm,text=f"Holder Name:\t\t{row[0]}",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
         lbl_name.place(relx=.3,rely=.3)
     
-        lbl_bal=Label(ifrm,text=f"Available Bal\t{row[1]}",bg='white',font=('Arial',15,'bold'),fg='red')
+        lbl_bal=Label(ifrm,text=f"Available Bal:\t\t{row[1]}",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
         lbl_bal.place(relx=.3,rely=.5)
     
-        lbl_date=Label(ifrm,text=f"ACN open date\t{row[2]}",bg='white',font=('Arial',15,'bold'),fg='red')
+        lbl_date=Label(ifrm,text=f"Account open date:\t{row[2]}",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
         lbl_date.place(relx=.3,rely=.7)
     
     def deposit():
-        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=3,highlightcolor='brown')
-        ifrm.configure(bg='white')
+        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=10,highlightcolor='brown')
+        ifrm.configure(bg='cadetblue1')
         ifrm.place(relx=.25,rely=.2,relwidth=.6,relheight=.6)
         
         lbl_page.configure(text="This is Deposit page")
@@ -300,19 +307,19 @@ def welcome_screen():
                 messagebox.showinfo("Deposit","Amount deposited")
                 
             
-        lbl_amt=Label(ifrm,text="Enter Amount",bg='white',font=('Arial',15,'bold'),fg='red')
+        lbl_amt=Label(ifrm,text="Enter Amount :",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
         lbl_amt.place(relx=.2,rely=.2)
         
         e_amt=Entry(ifrm,font=('Arial',20,'bold'),bd=5)
         e_amt.place(relx=.45,rely=.2)
     
-        btn_dep=Button(ifrm,text="deposit",command=deposit_db,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-        btn_dep.place(relx=.5,rely=.5)
+        btn_dep=Button(ifrm,text="deposit",command=deposit_db,font=('Arial',15,'bold'),bd=5,bg="powder blue",cursor="hand2")
+        btn_dep.place(relx=.56,rely=.4)
     
     
     def withdraw():
-        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=3,highlightcolor='brown')
-        ifrm.configure(bg='white')
+        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=10,highlightcolor='brown')
+        ifrm.configure(bg='cadetblue1')
         ifrm.place(relx=.25,rely=.2,relwidth=.6,relheight=.6)
         
         lbl_page.configure(text="This is Withdraw page")
@@ -346,22 +353,22 @@ def welcome_screen():
                 else:
                     messagebox.showwarning("Withdraw","Insufficient bal")
         
-        lbl_amt=Label(ifrm,text="Enter Amount",bg='white',font=('Arial',15,'bold'),fg='red')
+        lbl_amt=Label(ifrm,text="Enter Amount :",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
         lbl_amt.place(relx=.2,rely=.2)
         
         e_amt=Entry(ifrm,font=('Arial',20,'bold'),bd=5)
         e_amt.place(relx=.45,rely=.2)
     
-        btn_dep=Button(ifrm,text="withdraw",command=withdraw_db,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-        btn_dep.place(relx=.5,rely=.5)
+        btn_dep=Button(ifrm,text="withdraw",command=withdraw_db,font=('Arial',15,'bold'),bd=5,bg="powder blue",cursor="hand2")
+        btn_dep.place(relx=.56,rely=.4)
     
     
     def transfer():
-        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=3,highlightcolor='brown')
-        ifrm.configure(bg='white')
+        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=10,highlightcolor='brown')
+        ifrm.configure(bg='cadetblue1')
         ifrm.place(relx=.25,rely=.2,relwidth=.6,relheight=.6)
         
-        lbl_page.configure(text="This is transfer page")
+        lbl_page.configure(text="This is Transfer page")
         
         def transfer_db():
             t_acn=e_to.get()
@@ -402,28 +409,28 @@ def welcome_screen():
                 else:
                     messagebox.showwarning("Transfer","Insufficient bal")
         
-        lbl_to=Label(ifrm,text="Enter To ACN",bg='white',font=('Arial',15,'bold'),fg='red')
+        lbl_to=Label(ifrm,text="Enter To Account :",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
         lbl_to.place(relx=.2,rely=.2)
         
         e_to=Entry(ifrm,font=('Arial',20,'bold'),bd=5)
         e_to.place(relx=.45,rely=.2)
     
-        lbl_amt=Label(ifrm,text="Enter Amount",bg='white',font=('Arial',15,'bold'),fg='red')
+        lbl_amt=Label(ifrm,text="Enter Amount    :",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
         lbl_amt.place(relx=.2,rely=.4)
         
         e_amt=Entry(ifrm,font=('Arial',20,'bold'),bd=5)
         e_amt.place(relx=.45,rely=.4)
     
     
-        btn_dep=Button(ifrm,text="transfer",command=transfer_db,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-        btn_dep.place(relx=.5,rely=.6)
+        btn_dep=Button(ifrm,text="transfer",command=transfer_db,font=('Arial',15,'bold'),bd=5,bg="powder blue",cursor="hand2")
+        btn_dep.place(relx=.55,rely=.6)
     
     def update():
-        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=3,highlightcolor='brown')
-        ifrm.configure(bg='white')
+        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=10,highlightcolor='brown')
+        ifrm.configure(bg='cadetblue1')
         ifrm.place(relx=.25,rely=.2,relwidth=.6,relheight=.6)
         
-        lbl_page.configure(text="This is update profile page")
+        lbl_page.configure(text="This is Update Profile page")
         
         def update_profile():
             name=e_name.get()
@@ -446,45 +453,45 @@ def welcome_screen():
         row=cur.fetchone()
         con.close()
         
-        lbl_name=Label(ifrm,text="Name",bg='white',font=('Arial',15,'bold'),fg='red')
-        lbl_name.place(relx=.05,rely=.2)
+        lbl_name=Label(ifrm,text="Name :",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
+        lbl_name.place(relx=.07,rely=.2)
         
         e_name=Entry(ifrm,font=('Arial',15,'bold'),bd=5)
-        e_name.place(relx=.15,rely=.2)
+        e_name.place(relx=.17,rely=.2)
         e_name.insert(0,row[1])
 
-        lbl_pass=Label(ifrm,text="Pass",bg='white',font=('Arial',15,'bold'),fg='red')
-        lbl_pass.place(relx=.53,rely=.2)
+        lbl_pass=Label(ifrm,text="Password  :",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
+        lbl_pass.place(relx=.48,rely=.2)
         
         e_pass=Entry(ifrm,font=('Arial',15,'bold'),bd=5)
-        e_pass.place(relx=.62,rely=.2)
+        e_pass.place(relx=.64,rely=.2)
         e_pass.insert(0,row[2])
         
-        lbl_email=Label(ifrm,text="Email",bg='white',font=('Arial',15,'bold'),fg='red')
-        lbl_email.place(relx=.05,rely=.4)
+        lbl_email=Label(ifrm,text="Email :",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
+        lbl_email.place(relx=.07,rely=.4)
         
         e_email=Entry(ifrm,font=('Arial',15,'bold'),bd=5)
-        e_email.place(relx=.15,rely=.4)
+        e_email.place(relx=.17,rely=.4)
         e_email.insert(0,row[3])
         
-        lbl_mob=Label(ifrm,text="Mob",bg='white',font=('Arial',15,'bold'),fg='red')
-        lbl_mob.place(relx=.53,rely=.4)
+        lbl_mob=Label(ifrm,text="Mobile No. :",bg='cadetblue1',font=('Arial',15,'bold'),fg='red')
+        lbl_mob.place(relx=.48,rely=.4)
         
         e_mob=Entry(ifrm,font=('Arial',15,'bold'),bd=5)
-        e_mob.place(relx=.62,rely=.4)
+        e_mob.place(relx=.64,rely=.4)
         e_mob.insert(0,row[4])
 
     
-        btn_dep=Button(ifrm,text="update",command=update_profile,font=('Arial',15,'bold'),bd=5,bg="powder blue")
-        btn_dep.place(relx=.35,rely=.6)
+        btn_dep=Button(ifrm,text="update",command=update_profile,font=('Arial',15,'bold'),bd=5,bg="powder blue",cursor="hand2")
+        btn_dep.place(relx=.47,rely=.6)
     
     
     def txn_history():
-        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=3,highlightcolor='brown')
-        ifrm.configure(bg='white')
+        ifrm=Frame(frm,highlightbackground="brown",highlightthickness=10,highlightcolor='brown')
+        ifrm.configure(bg='cadetblue1')
         ifrm.place(relx=.25,rely=.2,relwidth=.6,relheight=.6)
         
-        lbl_page.configure(text="This is txn history page")
+        lbl_page.configure(text="This is Transactions history page")
         
         tv=Treeview(ifrm)
         tv.place(x=0,y=0,relheight=1,relwidth=1)
@@ -516,33 +523,40 @@ def welcome_screen():
             tv.insert("","end",values=(row[0],row[1],row[2],row[3]))
 
         
-        
-    btn_logout=Button(frm,text="logout",command=logout,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_logout.place(relx=.9,rely=0)
+    btn_logout=Button(frm,text="Logout",command=logout,width=6,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_logout.place(relx=.925,rely=0)
     
-    lbl_wel=Label(frm,text=f"Welcome,{tup[1]}",bg='pink',font=('Arial',15,'bold'),fg='green')
-    lbl_wel.place(relx=0,rely=0)
+    btn_homepage=Button(frm,text="Home",command=welcome_screen,width=6,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_homepage.place(relx=0,rely=.0)
     
-    lbl_page=Label(frm,text="This is Home Page",bg='pink',font=('Arial',30,'bold','underline'),fg='blue')
-    lbl_page.place(relx=.35,rely=0)
+    lbl_wel=Label(frm,text=f"Welcome,{tup[1]}",bg='cyan2',font=('Arial',30,'bold'),fg='royal blue')
+    lbl_wel.place(relx=0.5, rely=0, anchor='n')
     
-    btn_checkbal=Button(frm,text="check balance",command=checkbal,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_checkbal.place(relx=0,rely=.1)
+    lbl_page=Label(frm,text="This is Home Page",bg='cyan2',font=('Arial',20,'bold','underline'),fg='steelblue4')
+    lbl_page.place(relx=0.5, rely=.1, anchor='n')
     
-    btn_deposit=Button(frm,text="deposit amt",command=deposit,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_deposit.place(relx=0,rely=.25)
+    ifrm=Label(frm,text="""Hello Dear,\n\nWelcome to our Banking System! We are delighted to provide you with a simple, secure platform to manage your finances effortlessly.\n
+Here, convenience and control are in your hands. You can instantly check your account balance in real-time, deposit funds easily, and review your complete transaction history for total transparency. Our secure platform also allows you to transfer money to other accounts quickly and smoothly.\n
+We are committed to making your banking experience reliable and straightforward. Explore our features and manage your money with confidence. Thank you for choosing us as your trusted financial partner.""",bg='cyan2',font=('Arial',15,'bold'),wraplength=930,anchor='nw',justify='left',fg='steelblue4')
+    ifrm.place(relx=.25,rely=.2,relwidth=.6,relheight=.6)
     
-    btn_withdraw=Button(frm,text="withdraw amt",command=withdraw,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_withdraw.place(relx=0,rely=.4)
+    btn_checkbal=Button(frm,text="Check balance",command=checkbal,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_checkbal.place(relx=0,rely=.17)
     
-    btn_transfer=Button(frm,text="transfer",command=transfer,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_transfer.place(relx=0,rely=.55)
+    btn_deposit=Button(frm,text="Deposit amt",command=deposit,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_deposit.place(relx=0,rely=.29)
     
-    btn_update=Button(frm,text="update profile",command=update,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_update.place(relx=0,rely=.7)
+    btn_withdraw=Button(frm,text="Withdraw amt",command=withdraw,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_withdraw.place(relx=0,rely=.41)
     
-    btn_txnhist=Button(frm,text="txn history",command=txn_history,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue")
-    btn_txnhist.place(relx=0,rely=.85)
+    btn_transfer=Button(frm,text="Transfer",command=transfer,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_transfer.place(relx=0,rely=.53)
+    
+    btn_update=Button(frm,text="Update profile",command=update,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_update.place(relx=0,rely=.65)
+    
+    btn_txnhist=Button(frm,text="Txn history",command=txn_history,width=12,font=('Arial',20,'bold'),bd=5,bg="powder blue",cursor="hand2")
+    btn_txnhist.place(relx=0,rely=.77)
     
      
 login_screen()
